@@ -4,9 +4,7 @@ session_start();
 
 // Get product details
 $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
-$stmt = $conn->prepare("SELECT * FROM products WHERE id = :id");
-$stmt->execute(['id' => $id]);
-$product = $stmt->fetch();
+$product = tiny_trove_get_product($id);
 
 if (!$product) {
     die("<h2>Product not found.</h2><a href='index.php'>Back to Shop</a>");

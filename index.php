@@ -1,6 +1,6 @@
 <?php
 include 'db.php';
-$result = $conn->query("SELECT * FROM products");
+$products = tiny_trove_products();
 ?>
 
 <!DOCTYPE html>
@@ -23,37 +23,21 @@ $result = $conn->query("SELECT * FROM products");
 
 <main class="products">
     <div class="product-grid">
-        <?php while ($row = $result->fetch()): ?>
+        <?php foreach ($products as $row): ?>
             <div class="product">
                 <img src="<?= $row['image']; ?>" alt="<?= $row['name']; ?>">
                 <h3><?= $row['name']; ?></h3>
 				<a href="product.php?id=<?= $row['id']; ?>" class="product-view-details">View Details</a>
                 <p>₹<?= $row['price']; ?></p>
                 
-                <button class="add-to-cart-button" onclick="addToCart(<?= $row['id']; ?>)">🛒 Add to Cart</button>
+                <button class="add-to-cart-button add-to-cart" data-id="<?= $row['id']; ?>" data-name="<?= htmlspecialchars($row['name']); ?>" data-price="<?= $row['price']; ?>" data-image="<?= $row['image']; ?>">🛒 Add to Cart</button>
                 <!---<button onclick="addToWishlist(<?= $row['id']; ?>)">💟 Add to Wishlist</button>--->
             </div>
-        <?php endwhile; ?>
+        <?php endforeach; ?>
     </div>
 </main>
 
-<script>
-function addToCart(id) {
-    fetch('cart.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: `id=${id}&quantity=1`,  // Adjust as needed
-    })
-    .then(response => response.text())
-    .then(data => {
-        alert('Added to Cart!');
-        // Optionally, update the cart icon with the number of items
-    });
-}
-
-</script>
+<script src="script.js"></script>
 
 </body>
 </html>

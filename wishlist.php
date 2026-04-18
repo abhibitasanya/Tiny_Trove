@@ -18,9 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['id'])) {
 // Fetch wishlist items
 $wishlist_items = [];
 foreach ($_SESSION['wishlist'] as $id) {
-    $stmt = $conn->prepare("SELECT * FROM products WHERE id = :id");
-    $stmt->execute(['id' => (int)$id]);
-    $product = $stmt->fetch();
+    $product = tiny_trove_get_product((int) $id);
     if ($product) {
         $wishlist_items[] = $product;
     }
@@ -59,7 +57,6 @@ foreach ($_SESSION['wishlist'] as $id) {
 
 <script>
     function clearWishlist() {
-        // Call a PHP script to clear the wishlist
         window.location.href = 'clear_wishlist.php';  // Create this file to clear the wishlist session
     }
 </script>
