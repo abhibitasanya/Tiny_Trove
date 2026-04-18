@@ -1,72 +1,50 @@
-# 🎧 TinyTrove
+# Tiny Trove
 
-TinyTrove is a full-stack music streaming platform that allows users to **upload, manage, and stream audio files**. The project focuses on clean backend architecture, secure media handling, and smooth playback.
+Tiny Trove is a miniature-themed ecommerce web app where users can browse products, view product details, add items to cart, and place a basic checkout order.
 
----
+## Live Demo
+- https://tiny-trove.onrender.com
 
-## 🎯 Project Objective
-To build a scalable music platform similar to Spotify with:
-- Audio uploads
-- Song catalog management
-- Streaming support
-- Playlist-ready backend design
+## Features
+- Product listing page with cards and pricing
+- Product details page for each item
+- Session-based cart (add, update quantity, remove)
+- Session-based wishlist (add, remove, clear)
+- Simple checkout flow
+- Responsive UI using custom CSS
 
----
-
-## ✨ Features
-- 🎵 Upload songs with cover images  
-- ▶️ Stream audio files  
-- 📃 Song listing & search  
-- 🔐 User authentication  
-- 📂 Organized media storage  
-- 🎶 Playlist-ready database structure  
-
----
-
-## 🛠️ Tech Stack
-**Frontend**
+## Tech Stack
+- PHP (server-rendered pages)
 - HTML, CSS, JavaScript
+- Apache (via Docker on Render)
+- Render Web Service deployment
 
-**Backend**
-- Python (Flask)
-- Flask-CORS
-- REST APIs
+## Project Structure
+- `index.php`: Product listing page
+- `product.php`: Product details
+- `cart.php`: Cart management
+- `checkout.php`: Checkout flow
+- `wishlist.php`: Wishlist management
+- `remove.php`: Remove items from cart/wishlist
+- `clear_wishlist.php`: Clear wishlist action
+- `db.php`: In-memory product catalog and helper functions
+- `styles1.css`: Main styles
+- `script.js`: Client-side add-to-cart action
+- `images/`: Product and logo assets
+- `Dockerfile`, `docker-entrypoint.sh`, `render.yaml`: Deployment files
 
-**Database**
-- SQL database
+## Deployment
+This project is deployed on Render as a Docker-based Web Service.
 
-**Storage**
-- Local server storage for songs & cover images
+## Notes
+- Current version uses in-memory product data and session storage.
+- Cart/wishlist data is temporary and not persisted in a database.
 
----
+## Future Improvements
+- Add persistent database for products, users, and orders
+- Add authentication and user accounts
+- Add order history and admin product management
+- Add payment gateway integration
 
-## 🧠 Backend Highlights
-- Secure file uploads using `secure_filename`
-- Separate directories for:
-  - Audio files
-  - Cover images
-- Modular API structure
-- CORS enabled for frontend communication
-
----
-
-## ⚙️ How It Works
-1. User logs in  
-2. Uploads song and cover image  
-3. Metadata stored in database  
-4. Audio streamed from backend  
-5. Songs displayed and played in frontend player  
-
----
-
-## 🔮 Future Enhancements
-- Public & private playlists  
-- Likes / favorites  
-- Artist profiles  
-- Recommendation system  
-- Cloud storage integration  
-
----
-
-## 📄 License
-Developed for learning, experimentation, and portfolio use.
+## License
+Developed for learning and portfolio use.
