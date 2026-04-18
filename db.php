@@ -28,36 +28,3 @@ function tiny_trove_get_product(int $id): ?array
     $products = tiny_trove_products();
     return $products[$id] ?? null;
 }
-<?php
-$host = getenv('DB_HOST') ?: 'localhost';
-$user = getenv('DB_USER') ?: 'postgres';
-$pass = getenv('DB_PASS') ?: '';
-$dbname = getenv('DB_NAME') ?: 'tiny_trove';
-$port = (int)(getenv('DB_PORT') ?: 5432);
-$dsn = "pgsql:host={$host};port={$port};dbname={$dbname}";
-
-// Render provides a Postgres connection string as DATABASE_URL.
-$dbUrl = getenv('DATABASE_URL');
-if ($dbUrl) {
-    $parsed = parse_url($dbUrl);
-    if ($parsed !== false) {
-        $host = $parsed['host'] ?? $host;
-        $port = isset($parsed['port']) ? (int)$parsed['port'] : $port;
-        $user = $parsed['user'] ?? $user;
-        $pass = $parsed['pass'] ?? $pass;
-        if (!empty($parsed['path'])) {
-            $dbname = ltrim($parsed['path'], '/');
-        }
-        $dsn = "pgsql:host={$host};port={$port};dbname={$dbname}";
-    }
-}
-
-try {
-    $conn = new PDO($dsn, $user, $pass, [
-        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-        PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-    ]);
-} catch (PDOException $e) {
-    die('Database connection failed. Please verify your Render DB settings.');
-}
-?>
